@@ -1,4 +1,5 @@
-import './assets/main.css'
+//引入初始化样式文件
+import '@/styles/common.scss'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -9,7 +10,6 @@ import { getCategoryAPI } from './api/testapi'
 
 getCategoryAPI().then(res => {
   console.log(res)
-  
 })
 
 const app = createApp(App)
