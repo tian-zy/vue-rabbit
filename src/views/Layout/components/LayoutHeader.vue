@@ -1,5 +1,19 @@
 <script setup>
+import { getCategoryAPI } from '@/api/layout'
+import { onMounted, ref } from 'vue'
 
+// 获取导航列表
+const categoryList = ref([])
+const getCategory = async () => {
+  const res = await getCategoryAPI()
+  console.log(res)
+  
+  categoryList.value = res.result
+}
+  // 进页面dom渲染完毕直接获取导航列表
+onMounted(() => {
+  getCategory()
+})
 </script>
 
 <template>
@@ -9,12 +23,9 @@
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
-        <li class="home">
-          <RouterLink to="/">首页</RouterLink>
+        <li class="home" v-for="item in categoryList" :key="item.id">
+          <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
-        <li> <RouterLink to="/">居家</RouterLink> </li>
-        <li> <RouterLink to="/">美食</RouterLink> </li>
-        <li> <RouterLink to="/">服饰</RouterLink> </li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
