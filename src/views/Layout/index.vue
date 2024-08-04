@@ -7,6 +7,7 @@ import { onMounted } from 'vue';
 import { useCategoryStore } from '@/stores/category'
 const categorystore = useCategoryStore()
 
+//dom加载完毕直接调用getCategory方法渲染导航数据
 onMounted(() => categorystore.getCategory())
 </script>
 
