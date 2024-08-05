@@ -8,3 +8,7 @@ export const findNewAPI = () => instance.get('home/new')
 
 // 人气推荐
 export const getHotAPI = () => instance.get('home/hot')
+
+// 商品模块
+export const getGoodsAPI = () => instance.get('home/goods')
+
