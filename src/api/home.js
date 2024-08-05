@@ -1,7 +1,10 @@
 import instance from "@/utils/request"
 
-//获取轮播图
-export const getBannerAPI = () => instance.get('home/banner')
+// 获取轮播图
+// 默认为1，商品为2
+export const getBannerAPI = ({ distributionSite = '1' } = {}) => instance.get('home/banner', {
+  params: { distributionSite }  
+})
 
 //新鲜好物
 export const findNewAPI = () => instance.get('home/new')
