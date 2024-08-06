@@ -1,7 +1,5 @@
 <script setup>
 import DetailHot from './components/DetailHot.vue'
-import ImgView from '@/components/ImgView/index.vue'
-import XtxSku from '@/components/XtxSku/index.vue'
 import { getDetailAPI } from '@/api/detail';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
@@ -42,7 +40,7 @@ console.log(sku);
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-              <ImgView :imageList="goods.mainPictures"></ImgView>
+              <XtxImageView :imageList="goods.mainPictures"></XtxImageView>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
