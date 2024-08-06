@@ -1,5 +1,6 @@
 <script setup>
 import DetailHot from './components/DetailHot.vue'
+import ImgView from '@/components/ImgView/index.vue'
 import { getDetailAPI } from '@/api/detail';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
@@ -34,7 +35,7 @@ onMounted(() => getGoods())
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <ImgView></ImgView>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -118,9 +119,9 @@ onMounted(() => getGoods())
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
               <!-- 24小时 -->
-              <DetailHot></DetailHot>
-               <!-- 周榜 -->
-               <DetailHot></DetailHot>
+              <DetailHot :hotType="1"></DetailHot>
+              <!-- 周榜 -->
+              <DetailHot :hotType="2"></DetailHot>
             </div>
           </div>
         </div>
