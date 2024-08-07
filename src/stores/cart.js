@@ -5,6 +5,7 @@ import { ref } from 'vue'
 export const useCartStore = defineStore('cart', () => {
   // 定义state  cartList
   const cartList = ref([])
+
   // 定义添加购物车的action 函数
   const addCart = (goods) => {
     // 添加购物车操作
@@ -20,10 +21,16 @@ export const useCartStore = defineStore('cart', () => {
       cartList.value.push(goods)
     }
   }
+  // 头部购物车商品删除功能 action
+  const removeCart = (skuId) => {
+    cartList.value = cartList.value.filter(item =>item.skuId !== skuId)
+  }
+
   // 以对象的方式把state和action  return出去
   return {
     cartList,
-    addCart
+    addCart,
+    removeCart
   }
 },{
   persist: true
