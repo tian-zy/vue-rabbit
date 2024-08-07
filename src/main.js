@@ -11,9 +11,12 @@ import { componentPlugin } from '@/components'
 import App from './App.vue'
 import router from './router'
 
+// 引入持久化插件
+import persist from 'pinia-plugin-persistedstate'
+
 const app = createApp(App)
 
-app.use(createPinia())
+app.use(createPinia().use(persist))
 app.use(router)
 app.use(lazyPlugin)
 app.use(componentPlugin)
