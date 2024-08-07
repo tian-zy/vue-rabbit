@@ -9,8 +9,8 @@ const userStore = useUserStore()
 
 // 表单验证
 const form = ref({
-  account: '',
-  password: '',
+  account: 'xiaotuxian001',
+  password: '123456',
   agree: true
 })
 
