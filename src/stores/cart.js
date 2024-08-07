@@ -1,6 +1,6 @@
 // 购物车模块
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 export const useCartStore = defineStore('cart', () => {
   // 定义state  cartList
@@ -21,16 +21,25 @@ export const useCartStore = defineStore('cart', () => {
       cartList.value.push(goods)
     }
   }
+
   // 头部购物车商品删除功能 action
   const removeCart = (skuId) => {
     cartList.value = cartList.value.filter(item =>item.skuId !== skuId)
   }
 
+  // 头部购物计算商品总数
+  const allCount = computed(() => cartList.value.reduce((prev, item) => prev + item.count, 0))
+
+  // 头部购物车计算商品总价
+  const allPrice = computed(() => cartList.value.reduce((prev, item) => prev + item.count * item.price, 0))
+
   // 以对象的方式把state和action  return出去
   return {
     cartList,
     addCart,
-    removeCart
+    removeCart,
+    allCount,
+    allPrice
   }
 },{
   persist: true
