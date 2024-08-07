@@ -1,6 +1,7 @@
 import axios from "axios"
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
+import { useUserStore } from '@/stores/user';
 
 // 创建实例时配置默认值
 const instance = axios.create({
@@ -11,6 +12,11 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
+  const userStore = useUserStore()
+  const token = userStore.userInfo.token
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
   return config;
 }, function (error) {
   // 对请求错误做些什么
