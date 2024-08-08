@@ -1,5 +1,5 @@
 // 购物车模块
-import { findNewCartListAPI, insertCartAPI } from '@/api/cart'
+import { delCartAPI, findNewCartListAPI, insertCartAPI } from '@/api/cart'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { useUserStore } from './user'
@@ -11,14 +11,19 @@ export const useCartStore = defineStore('cart', () => {
   const userStore = useUserStore()
   // const isLogin = computed(() => userStore.userInfo.token)
 
+  // 封装更新头部购物车的action
+  const updateCartList = async () => {
+    const res = await findNewCartListAPI()
+    cartList.value = res.result
+  }
+
   // 定义添加购物车的action 函数
   const addCart = async (goods) => {
     const { skuId, count } = goods
     if (userStore.userInfo.token) {
       // 已登录
       await insertCartAPI({ skuId, count })
-      const res = await findNewCartListAPI()
-      cartList.value = res.result
+      updateCartList()
     } else {
       // 未登录
       // 添加购物车操作
@@ -37,8 +42,14 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   // 头部购物车商品删除功能 action
-  const removeCart = (skuId) => {
-    cartList.value = cartList.value.filter(item =>item.skuId !== skuId)
+  const removeCart = async (skuId) => {
+    if (userStore.userInfo.token) {
+      await delCartAPI([skuId])
+      updateCartList()
+    } else {
+      cartList.value = cartList.value.filter(item =>item.skuId !== skuId)
+    }
+    
   }
 
   // 头部购物计算商品总数

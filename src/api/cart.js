@@ -5,3 +5,6 @@ export const insertCartAPI = ({ skuId, count }) => instance.post('/member/cart',
 
 // 获取购物车列表
 export const findNewCartListAPI = () => instance.get('/member/cart')
+
+// 删除购物车数据
+export const delCartAPI = (ids) => instance.delete('/member/cart', { data: { ids } })
