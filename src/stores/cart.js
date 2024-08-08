@@ -38,6 +38,15 @@ export const useCartStore = defineStore('cart', () => {
     cartList.value.find(item => item.skuId === i.skuId).selected = selected
   }
 
+  // 小选控制大选
+  const isAll = computed(() => {
+    return cartList.value.every(item => item.selected)
+  })
+  // 大选控制小选
+  const allCheck = (selected) => {
+    cartList.value.forEach(item => item.selected = selected)
+  }
+
   // 以对象的方式把state和action  return出去
   return {
     cartList,
@@ -45,7 +54,9 @@ export const useCartStore = defineStore('cart', () => {
     removeCart,
     allCount,
     allPrice,
-    singleCheck
+    singleCheck,
+    isAll,
+    allCheck
   }
 },{
   persist: true
