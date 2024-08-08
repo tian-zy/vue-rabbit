@@ -33,13 +33,19 @@ export const useCartStore = defineStore('cart', () => {
   // 头部购物车计算商品总价
   const allPrice = computed(() => cartList.value.reduce((prev, item) => prev + item.count * item.price, 0))
 
+  // 小选框
+  const singleCheck = (i, selected) => {
+    cartList.value.find(item => item.skuId === i.skuId).selected = selected
+  }
+
   // 以对象的方式把state和action  return出去
   return {
     cartList,
     addCart,
     removeCart,
     allCount,
-    allPrice
+    allPrice,
+    singleCheck
   }
 },{
   persist: true
