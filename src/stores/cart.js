@@ -95,7 +95,8 @@ export const useCartStore = defineStore('cart', () => {
     allCheck,
     selCount,
     selPrice,
-    clearList
+    clearList,
+    updateCartList
   }
 },{
   persist: true
