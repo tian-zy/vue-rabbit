@@ -12,3 +12,6 @@ export const delCartAPI = (ids) => instance.delete('/member/cart', { data: { ids
 // 合并购物车
 export const mergeCartAPI = (data) => instance.post('/member/cart/merge', data)
 
+// 生成订单
+export const createOrderAPI = (data) => instance.post('/member/order', data)
+
